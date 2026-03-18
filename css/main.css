@@ -294,6 +294,194 @@ textarea.form-input {
   clear: both;
 }
 
+
+/* =========================
+   Task Edit Form Styling
+   ========================= */
+
+.task-edit-form {
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.form-group {
+    display: flex;
+    align-items: flex-start;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 3px rgba(0,119,204,0.3);
+}
+
+
+
+/* ================================
+   Kanban Board Improved Styling
+================================ */
+
+body{
+    background: #f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* board */
+.kanban-board{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* columns */
+.kanban-column{
+    flex: 1;
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    min-height: 400px;
+}
+
+/* column titles */
+.column-header{
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: .5rem;
+}
+
+/* tasks */
+.tasks-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* task cards */
+.task-item{
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: .8rem;
+    margin-bottom: 1rem;
+    transition: all .2s ease;
+}
+
+.task-item:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+/* title */
+.task-item a{
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0077cc;
+}
+
+.task-item a:hover{
+    text-decoration: underline;
+}
+
+/* text */
+.task-item p{
+    font-size: .9rem;
+    margin: .25rem 0;
+}
+
+/* header */
+.site-header{
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.site-header h1{
+    text-align: center;
+}
+
+/* link button */
+.site-header a{
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.site-header a:hover{
+    text-decoration: underline;
+}
+
+/* Buttons */
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #0077cc;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #005fa3;
+}
+
+.btn-secondary {
+    background-color: #ccc;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #b5b5b5;
+}
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Header link */
+
+.site-header a {
+    text-decoration: none;
+    color: #0077cc;
+}
+
+.site-header a:hover {
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.

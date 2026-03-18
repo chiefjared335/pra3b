@@ -6,7 +6,7 @@ require_once 'conn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
 
     // Validate required fields
-    if (empty($_POST['id']) || empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['afdeling']) || empty($_POST['status'])) {
+    if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['afdeling'])) {
         die("Alle verplichte velden moeten ingevuld zijn.");
     }
 
@@ -72,5 +72,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle task creation
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'create') {
+    $titel = $_POST['titel'];
+    if (empty($titel)) {
+        die("Titel is verplicht");
+    }
+    $beschrijving = $_POST['beschrijving'];
+    if (empty($beschrijving)) {
+        die("Beschrijving is verplicht");
+    } 
+    $afdeling = $_POST['afdeling'];
+    if (empty($afdeling)) {
+        die("Afdeling is verplicht");
+    }
+    echo $titel . " / " . $beschrijving . " / " . $afdeling;
+    require_once 'conn.php';
+
+    $query = "INSERT INTO taken (titel, beschrijving, afdeling)
+    VALUES(:titel, :beschrijving, :afdeling)";
+
+    $statement = $conn->prepare($query);
+
+    $statement->execute([
+        ":titel" => $titel,
+        ":beschrijving" => $beschrijving,
+        ":afdeling" => $afdeling
+    ]);
+    header("Location: ../index.php?msg=Melding aangepast");
+}
+
 // If not a valid POST request, redirect to index
 header("Location: ../index.php");
+
+// Handle task deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    $id = $_POST['id'] ?? '';
+
+    if (empty($id)) {
+        die("Geen taak ID opgegeven.");
+    }
+
+    try {
+        $query = "DELETE FROM taken WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([":id" => $id]);
+
+        header("Location: ../index.php?msg=Taak verwijderd");
+        exit;
+    } catch (PDOException $e) {
+        die("Database fout: " . $e->getMessage());
+    }
+}
+
+// If not a valid POST request, redirect to index
+header("Location: ../index.php");
+exit;
