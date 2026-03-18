@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once 'conn.php';
 
@@ -81,23 +82,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $beschrijving = $_POST['beschrijving'];
     if (empty($beschrijving)) {
         die("Beschrijving is verplicht");
-    } 
+    }
     $afdeling = $_POST['afdeling'];
     if (empty($afdeling)) {
         die("Afdeling is verplicht");
     }
+
+    // Get user ID from session
+    $user = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
     echo $titel . " / " . $beschrijving . " / " . $afdeling;
     require_once 'conn.php';
 
-    $query = "INSERT INTO taken (titel, beschrijving, afdeling)
-    VALUES(:titel, :beschrijving, :afdeling)";
+    $query = "INSERT INTO taken (titel, beschrijving, afdeling, user)
+    VALUES(:titel, :beschrijving, :afdeling, :user)";
 
     $statement = $conn->prepare($query);
 
     $statement->execute([
         ":titel" => $titel,
         ":beschrijving" => $beschrijving,
-        ":afdeling" => $afdeling
+        ":afdeling" => $afdeling,
+        ":user" => $user
     ]);
     header("Location: ../index.php?msg=Melding aangepast");
 }

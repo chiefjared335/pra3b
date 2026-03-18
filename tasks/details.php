@@ -1,5 +1,4 @@
 <?php
-    // Start session and check if user is logged in
     session_start();
 
     if (!isset($_SESSION['user_id'])) {
@@ -37,7 +36,7 @@
             <h1>Taak Details</h1>
             <a href="<?php echo $base_url; ?>/index.php">Terug naar overzicht</a>
         </header>
-        
+
 
         <div class="task-details">
             <div class="detail-row">
