@@ -127,9 +127,14 @@ label{
 .header-content > * {
     flex: 1;
 }
+.adefdeling-link {
+    text-align: left;
+    margin-top: 10px;
+}
 
 .header-content .logo {
     text-align: center;
+
 }
 
 .logo {

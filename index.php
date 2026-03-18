@@ -48,13 +48,15 @@ try {
         <div class="container">
             <div class="header-content">
                 <nav>
-                    <a href="tasks/create.php">Nieuwe Taak</a>
+                    <a href="tasks/create.php">Nieuwe Taak</a><br>
+                    <a href="tasks/afdeling.php" class="afdeling-link">Afdelingen</a>
                 </nav>
                 <h1 class="logo">Takenlijst</h1>
                 <div></div>
             </div>
         </div>
     </header>
+    
 
     <div class="container">
         <h1>Takenlijst</h1>
