@@ -1,4 +1,13 @@
-<?php require_once '../backend/config.php'; ?>
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit;
+}
+
+require_once '../backend/config.php';
+?>
 <!DOCTYPE html>
 <html lang="nl">
 

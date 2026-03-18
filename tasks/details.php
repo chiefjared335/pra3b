@@ -1,9 +1,13 @@
 <?php
-$id = $_GET["id"] ?? null;
+    session_start();
 
-if (!$id) {
-    die("Task ID not set");
-}
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../login.php");
+        exit;
+    }
+
+    $id = $_GET["id"];
+    if (!isset($id)) die("Task ID not set");
 
     require_once '../backend/conn.php';
     $query = "SELECT * FROM taken WHERE id = :id";
@@ -32,7 +36,7 @@ if (!$id) {
             <h1>Taak Details</h1>
             <a href="<?php echo $base_url; ?>/index.php">Terug naar overzicht</a>
         </header>
-        
+
 
         <div class="task-details">
             <div class="detail-row">

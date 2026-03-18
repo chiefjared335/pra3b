@@ -1,9 +1,16 @@
 <?php
+    session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../login.php");
+        exit;
+    }
+
     $id = $_GET["id"];
     if (!isset($id)) die("Task ID not set");
 
     require_once '../backend/conn.php';
-    
+
     // Fetch task data
     $query = "SELECT * FROM taken WHERE id = :id";
     $statement = $conn->prepare($query);
@@ -13,7 +20,7 @@
     if (!$task) {
         die("Taak niet gevonden");
     }
-    
+
     // Fetch all users for dropdown
     $usersQuery = "SELECT id, naam FROM users ORDER BY naam";
     $usersStmt = $conn->prepare($usersQuery);
@@ -40,7 +47,7 @@
             <form action="<?php echo $base_url; ?>/backend/TaskController.php" method="POST">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($task['id']); ?>">
-                
+
                 <div class="form-group">
                     <label for="titel">Titel: *</label>
                     <input type="text" id="titel" name="titel" class="form-input" value="<?php echo htmlspecialchars($task['titel']); ?>" required>
