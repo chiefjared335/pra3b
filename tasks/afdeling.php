@@ -2,19 +2,34 @@
 require_once '../backend/conn.php';
 
 $selectedAfdeling = $_GET['afdeling'] ?? 'all';
+$selectedUser = $_GET['user'] ?? 'all';
 
 try {
 
     $afdelingen = ['personeel', 'horeca', 'techniek', 'inkoop', 'klantenservice', 'groen'];
 
 
-    if ($selectedAfdeling === 'all') {
-        $stmt = $conn->prepare("SELECT * FROM taken ORDER BY created_at DESC");
-        $stmt->execute();
-    } else {
-        $stmt = $conn->prepare("SELECT * FROM taken WHERE afdeling = :afdeling ORDER BY created_at DESC");
-        $stmt->execute([':afdeling' => $selectedAfdeling]);
-    }
+
+        $sql = "SELECT * FROM taken WHERE 1=1";
+        $params = [];
+
+
+        if ($selectedAfdeling !== 'all') {
+            $sql .= " AND afdeling = :afdeling";
+            $params[':afdeling'] = $selectedAfdeling;
+        }
+
+
+        if ($selectedUser !== 'all') {
+            $sql .= " AND user = :user";
+            $params[':user'] = $selectedUser;
+        }
+
+
+        $sql .= " ORDER BY created_at DESC";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
 
     $allTasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -61,7 +76,8 @@ try {
     <div class="container">
         <div class="header-content">
             <nav>
-                <a href="create.php">Nieuwe Taak</a>
+                <a href="create.php">Nieuwe Taak</a><br>
+                <a href="../index.php" class="afdeling-link">takenlijst</a>
             </nav>
             <h1 class="logo">Takenlijst</h1>
             <div></div>
@@ -73,20 +89,27 @@ try {
     <h1>Takenlijst</h1>
 
 
-    <form method="GET">
-        <label for="afdeling">Kies afdeling:</label>
-        <div class="form-group">
-        <select name="afdeling" id="afdeling" class="form-input" onchange="this.form.submit()">
-            <option value="all">Alle afdelingen</option>
-            <?php foreach ($afdelingen as $afd): ?>
-                <option value="<?php echo htmlspecialchars($afd); ?>"
-                    <?php if ($selectedAfdeling === $afd) echo 'selected'; ?>>
-                    <?php echo htmlspecialchars($afd); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        </div>
-    </form>
+ <form method="GET">
+    <label for="afdeling">Kies afdeling:</label>
+    <select name="afdeling" id="afdeling" class="form-input1" onchange="this.form.submit()">
+        <option value="all">Alle afdelingen</option>
+        <?php foreach ($afdelingen as $afd): ?>
+            <option value="<?php echo $afd; ?>" <?php if ($selectedAfdeling === $afd) echo 'selected'; ?>>
+                <?php echo $afd; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
+    <label for="user">Kies gebruiker:</label>
+    <select name="user" id="user" class="form-input1" onchange="this.form.submit()">
+        <option value="all">Alle gebruikers</option>
+        <?php foreach ($users as $usr): ?>
+            <option value="<?php echo $usr['id']; ?>" <?php if ($selectedUser == $usr['id']) echo 'selected'; ?>>
+                <?php echo $usr['naam']; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</form>
 
     <div class="kanban-board">
 

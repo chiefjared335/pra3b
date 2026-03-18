@@ -110,6 +110,9 @@ label{
 .form-input{
     width: 600px;
 }
+.form-input1{
+    width: 300px
+}
 
 /* Header */
 .site-header {
@@ -327,13 +330,23 @@ textarea.form-input {
     border-radius: 4px;
     font-size: 1rem;
 }
+.form-input1 {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
 
 .form-input:focus {
     outline: none;
     border-color: #0077cc;
     box-shadow: 0 0 3px rgba(0,119,204,0.3);
 }
-
+.form-input1:focus {
+    outline: none;
+    border-color: #0077cc;
+    box-shadow: 0 0 3px rgba(0,119,204,0.3);
+}
 
 
 /* ================================
