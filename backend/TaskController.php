@@ -7,7 +7,7 @@ require_once 'conn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
 
     // Validate required fields
-    if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['afdeling'])) {
+    if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['deadline']) || empty($_POST['afdeling'])) {
         die("Alle verplichte velden moeten ingevuld zijn.");
     }
 
@@ -83,6 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($beschrijving)) {
         die("Beschrijving is verplicht");
     }
+    $deadline = $_POST['deadline'];
+    if (empty($deadline)) {
+        die("Deadline is verplicht");
+    }
+
     $afdeling = $_POST['afdeling'];
     if (empty($afdeling)) {
         die("Afdeling is verplicht");
@@ -91,17 +96,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     // Get user ID from session
     $user = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-    echo $titel . " / " . $beschrijving . " / " . $afdeling;
+    echo $titel . " / " . $beschrijving . " / " . $deadline . " / " . $afdeling;
     require_once 'conn.php';
 
-    $query = "INSERT INTO taken (titel, beschrijving, afdeling, user)
-    VALUES(:titel, :beschrijving, :afdeling, :user)";
+    $query = "INSERT INTO taken (titel, beschrijving, deadline, afdeling, user)
+    VALUES(:titel, :beschrijving, :deadline, :afdeling, :user)";
 
     $statement = $conn->prepare($query);
 
     $statement->execute([
         ":titel" => $titel,
         ":beschrijving" => $beschrijving,
+        ":deadline" => $deadline,
         ":afdeling" => $afdeling,
         ":user" => $user
     ]);

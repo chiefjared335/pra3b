@@ -52,6 +52,11 @@ $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
 <label for="beschrijving">Beschrijving:</label>
 <input type="text" id="beschrijving" name="beschrijving" class="form-input" placeholder="Beschrijving van de taak">
 </div>
+               
+<div class="form-group">
+<label for="deadline">Deadline:</label>
+<input type="date" id="deadline" name="deadline" class="form-input">
+</div>
 
 <div class="form-group">
 <label for="afdeling">Afdeling:</label>
