@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 require_once 'backend/conn.php';
 
 try {
-    $stmt = $conn->prepare("SELECT * FROM taken ORDER BY created_at DESC");
+    $stmt = $conn->prepare("SELECT * FROM taken ORDER BY deadline ASC");
     $stmt->execute();
     $allTasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
