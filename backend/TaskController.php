@@ -114,9 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     header("Location: ../index.php?msg=Melding aangepast");
 }
 
-// If not a valid POST request, redirect to index
-header("Location: ../index.php");
-
 // Handle task deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $id = $_POST['id'] ?? '';
@@ -132,6 +129,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
         header("Location: ../index.php?msg=Taak verwijderd");
         exit;
+    } catch (PDOException $e) {
+        die("Database fout: " . $e->getMessage());
+    }
+}
+
+// Handle mark task as complete
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'mark_complete') {
+
+    // Validate task ID
+    if (empty($_POST['id'])) {
+        die("Taak ID is vereist.");
+    }
+
+    $taskId = $_POST['id'];
+
+    // Update task status to 'klaar'
+    try {
+        $query = "UPDATE taken SET status = 'klaar' WHERE id = :id";
+        $stmt = $conn->prepare($query);
+        $result = $stmt->execute([':id' => $taskId]);
+
+        if ($result) {
+            // Redirect back to the referring page, or to index if no referrer
+            $referrer = $_SERVER['HTTP_REFERER'] ?? '../index.php';
+            header("Location: " . $referrer);
+            exit;
+        } else {
+            die("Fout bij het markeren van de taak als klaar.");
+        }
+
     } catch (PDOException $e) {
         die("Database fout: " . $e->getMessage());
     }

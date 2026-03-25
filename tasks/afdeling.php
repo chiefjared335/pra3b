@@ -43,7 +43,7 @@ try {
         $userLookup[$user['id']] = $user['naam'];
     }
 
- 
+
     $todoTasks = [];
     $bezigTasks = [];
     $klaarTasks = [];
@@ -126,6 +126,11 @@ try {
                                 <?php echo htmlspecialchars($task['titel']); ?>
                             </a>
                             <p><strong>Afdeling:</strong> <?php echo htmlspecialchars($task['afdeling']); ?></p>
+                            <form method="POST" action="../backend/TaskController.php">
+                                <input type="hidden" name="action" value="mark_complete">
+                                <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                <button type="submit" class="btn btn-success">Markeer als Klaar</button>
+                            </form>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -146,6 +151,11 @@ try {
                                 <?php echo htmlspecialchars($task['titel']); ?>
                             </a>
                             <p><strong>Afdeling:</strong> <?php echo htmlspecialchars($task['afdeling']); ?></p>
+                            <form method="POST" action="../backend/TaskController.php">
+                                <input type="hidden" name="action" value="mark_complete">
+                                <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                <button type="submit" class="btn btn-success">Markeer als Klaar</button>
+                            </form>
                         </li>
                     <?php endforeach; ?>
                 </ul>

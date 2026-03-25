@@ -64,7 +64,6 @@ try {
             </div>
         </div>
     </header>
-    
 
     <div class="container">
         <h1>Takenlijst</h1>
@@ -87,6 +86,11 @@ try {
                                 <p><strong>Status:</strong> <?php echo htmlspecialchars($task['status']); ?></p>
                                 <p><strong>Deadline:</strong> <?php echo $task['deadline'] ? date('d-m-Y', strtotime($task['deadline'])) : 'Geen deadline'; ?></p>
                                 <p><strong>Toegewezen aan:</strong> <?php echo isset($userLookup[$task['user']]) ? htmlspecialchars($userLookup[$task['user']]) : 'Niet toegewezen'; ?></p>
+                                <form method="POST" action="backend/TaskController.php">
+                                    <input type="hidden" name="action" value="mark_complete">
+                                    <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                    <button type="submit" class="btn btn-success">Markeer als Klaar</button>
+                                </form>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -110,6 +114,11 @@ try {
                                 <p><strong>Status:</strong> <?php echo htmlspecialchars($task['status']); ?></p>
                                 <p><strong>Deadline:</strong> <?php echo $task['deadline'] ? date('d-m-Y', strtotime($task['deadline'])) : 'Geen deadline'; ?></p>
                                 <p><strong>Toegewezen aan:</strong> <?php echo isset($userLookup[$task['user']]) ? htmlspecialchars($userLookup[$task['user']]) : 'Niet toegewezen'; ?></p>
+                                <form method="POST" action="backend/TaskController.php">
+                                    <input type="hidden" name="action" value="mark_complete">
+                                    <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                                    <button type="submit" class="btn btn-success">Markeer als Klaar</button>
+                                </form>
                             </li>
                         <?php endforeach; ?>
                     </ul>

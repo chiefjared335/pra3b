@@ -77,10 +77,17 @@
 
         <div class="task-actions">
             <a href="edit.php?id=<?php echo $task['id']; ?>" class="btn btn-primary">Taak aanpassen</a>
+
+            <!-- Only show the mark as complete button if the status is not done  -->
+            <?php if ($task['status'] !== 'klaar'): ?>
+                <form method="POST" action="../backend/TaskController.php" style="display: inline-block; margin-left: 0.5rem;">
+                    <input type="hidden" name="action" value="mark_complete">
+                    <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
+                    <button type="submit" class="btn btn-success">Markeer als Klaar</button>
+                </form>
+            <?php endif; ?>
         </div>
-
     </div>
-
 </body>
 
 </html>
