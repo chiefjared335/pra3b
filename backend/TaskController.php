@@ -3,10 +3,10 @@ session_start();
 
 require_once 'conn.php';
 
-// Handle task update
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
 
-    // Validate required fields
+   
     if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['deadline']) || empty($_POST['afdeling'])) {
         die("Alle verplichte velden moeten ingevuld zijn.");
     }
@@ -19,13 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $deadline = !empty($_POST['deadline']) ? $_POST['deadline'] : null;
     $user = !empty($_POST['user']) ? $_POST['user'] : null;
 
-    // Validate status value
+    
     $allowedStatuses = ['todo', 'bezig', 'klaar'];
     if (!in_array($status, $allowedStatuses)) {
         die("Ongeldige status waarde.");
     }
 
-    // Validate user exists if provided
+  
     if ($user !== null) {
         try {
             $userCheckStmt = $conn->prepare("SELECT id FROM users WHERE id = :user_id");
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         }
     }
 
-    // Update task in database
+    
     try {
         $query = "UPDATE taken
                   SET titel = :titel,
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         ]);
 
         if ($result) {
-            // Redirect back to details page
+          
             header("Location: ../tasks/details.php?id=" . $id);
             exit;
         } else {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Handle task creation
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'create') {
     $titel = $_POST['titel'];
     if (empty($titel)) {
@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         die("Afdeling is verplicht");
     }
 
-    // Get user ID from session
+
     $user = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
     echo $titel . " / " . $beschrijving . " / " . $deadline . " / " . $afdeling;
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     header("Location: ../index.php?msg=Melding aangepast");
 }
 
-// Handle task deletion
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $id = $_POST['id'] ?? '';
 
@@ -134,24 +134,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Handle mark task as complete
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'mark_complete') {
 
-    // Validate task ID
+
     if (empty($_POST['id'])) {
         die("Taak ID is vereist.");
     }
 
     $taskId = $_POST['id'];
 
-    // Update task status to 'klaar'
+
     try {
         $query = "UPDATE taken SET status = 'klaar' WHERE id = :id";
         $stmt = $conn->prepare($query);
         $result = $stmt->execute([':id' => $taskId]);
 
         if ($result) {
-            // Redirect back to the referring page, or to index if no referrer
             $referrer = $_SERVER['HTTP_REFERER'] ?? '../index.php';
             header("Location: " . $referrer);
             exit;
@@ -164,6 +163,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// If not a valid POST request, redirect to index
 header("Location: ../index.php");
 exit;

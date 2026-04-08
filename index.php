@@ -60,7 +60,11 @@ try {
                     <a href="tasks/afdeling.php" class="afdeling-link">Afdelingen</a>
                 </nav>
                 <h1 class="logo">Takenlijst</h1>
-                <div></div>
+                <div>
+                    <a href="register.php">Nieuwe Gebruiker toevoegen</a>
+                    <a href="backend/LoginController.php?action=logout" class="btn btn-secondary">Uitloggen</a>
+                </div>
+
             </div>
         </div>
     </header>

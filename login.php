@@ -38,7 +38,12 @@
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Inloggen</button>
+
+
+                <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Inloggen</button>
+                <a href="register.php" class="btn btn-secondary">Nieuw account registreren</a>
+            </div>
         </form>
     </div>
 </body>
