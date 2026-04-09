@@ -70,6 +70,18 @@ $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
 <option value="groen">Groen</option>
 </select>
 </div>
+<div class="form-group">
+    <label for="cat">Categorie:</label>
+    <select name="cat" id="cat" class="form-input">
+        <option value="">– kies een categorie –</option>
+        <option value="zwart"> geen Urgente</option>
+        <option value="rood">geen prioriteit</option>
+        <option value="oranje">Lage Prioriteit</option>
+        <option value="groen">Middelmatige Prioriteit</option>
+        <option value="blauw">Belangrijk</option>
+        <option value="donkergroen">Heel Belangrijk</option>
+    </select>
+</div>
 
 <div class="form-actions">
 <button type="submit" class="btn btn-primary">Taak aanmaken</button>
