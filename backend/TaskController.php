@@ -7,7 +7,7 @@ require_once 'conn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
 
    
-    if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['deadline']) || empty($_POST['afdeling'])) {
+    if  (empty($_POST['titel']) || empty($_POST['beschrijving']) || empty($_POST['deadline']) || empty($_POST['afdeling']) || empty($_POST['cat'])) {
         die("Alle verplichte velden moeten ingevuld zijn.");
     }
 
@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $status = $_POST['status'];
     $deadline = !empty($_POST['deadline']) ? $_POST['deadline'] : null;
     $user = !empty($_POST['user']) ? $_POST['user'] : null;
+    $cat = !empty($_POST['cat']) ? $_POST['cat'] : null;
 
     
     $allowedStatuses = ['todo', 'bezig', 'klaar'];
@@ -46,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                       afdeling = :afdeling,
                       status = :status,
                       deadline = :deadline,
-                      user = :user
+                      user = :user,
+                      cat = :cat
                   WHERE id = :id";
 
         $stmt = $conn->prepare($query);
@@ -57,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             ':status' => $status,
             ':deadline' => $deadline,
             ':user' => $user,
-            ':id' => $id
+            ':id' => $id,
+            ':cat' => $cat
         ]);
 
         if ($result) {
@@ -92,15 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     if (empty($afdeling)) {
         die("Afdeling is verplicht");
     }
+    $cat = $_POST["cat"];
+    if (empty($cat)) {
+        die("Categorie is verplicht");
+    }
 
 
     $user = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-    echo $titel . " / " . $beschrijving . " / " . $deadline . " / " . $afdeling;
+    echo $titel . " / " . $beschrijving . " / " . $deadline . " / " . $afdeling . " / " . $cat;
     require_once 'conn.php';
 
-    $query = "INSERT INTO taken (titel, beschrijving, deadline, afdeling, user)
-    VALUES(:titel, :beschrijving, :deadline, :afdeling, :user)";
+    $query = "INSERT INTO taken (titel, beschrijving, deadline, afdeling, user, cat)
+    VALUES(:titel, :beschrijving, :deadline, :afdeling, :user, :cat)";
 
     $statement = $conn->prepare($query);
 
@@ -109,7 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         ":beschrijving" => $beschrijving,
         ":deadline" => $deadline,
         ":afdeling" => $afdeling,
-        ":user" => $user
+        ":user" => $user,
+        ":cat" => $cat
     ]);
     header("Location: ../index.php?msg=Melding aangepast");
 }
