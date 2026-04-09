@@ -53,6 +53,10 @@
                 <strong>Afdeling:</strong>
                 <span><?php echo htmlspecialchars($task['afdeling']); ?></span>
             </div>
+                <div class="detail-row">
+                <strong>Categorie:</strong>
+                <span><?php echo htmlspecialchars($task['cat']); ?></span>
+            </div>
 
             <div class="detail-row">
                 <strong>Status:</strong>
