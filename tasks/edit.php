@@ -70,6 +70,18 @@
                         <option value="groen" <?php echo $task['afdeling'] === 'groen' ? 'selected' : ''; ?>>groen</option>
                  </select>
                 </div>
+                <div class="form-group">
+                    <label for="cat">Categorie: *</label>
+                    <select id="cat" name="cat" class="form-input" required>
+                        <option value="">– kies een categorie –</option>
+                        <option value="zwart" <?php echo $task['cat'] === 'zwart' ? 'selected' : ''; ?>> geen Urgente</option>
+                        <option value="rood" <?php echo $task['cat'] === 'rood' ? 'selected' : ''; ?>>geen prioriteit</option>
+                        <option value="oranje" <?php echo $task['cat'] === 'oranje' ? 'selected' : ''; ?>>Lage Prioriteit</option>
+                        <option value="groen" <?php echo $task['cat'] === 'groen' ? 'selected' : ''; ?>>Middelmatige Prioriteit</option>
+                        <option value="blauw" <?php echo $task['cat'] === 'blauw' ? 'selected' : ''; ?>>Belangrijk</option>
+                        <option value="donkergroen" <?php echo $task['cat'] === 'donkergroen' ? 'selected' : ''; ?>>Heel Belangrijk</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="status">Status: *</label>
