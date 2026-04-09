@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             ':deadline' => $deadline,
             ':user' => $user,
             ':id' => $id,
-            ':cat' => $cat
+            ':cat' => $cat 
         ]);
 
         if ($result) {
