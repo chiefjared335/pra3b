@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $id = $_POST['id'];
     $titel = trim($_POST['titel']);
     $beschrijving = trim($_POST['beschrijving']);
-    $afdeling = trim($_POST['afdeling']);
+    $afdeling = trim($_POST['afdeling']); 
     $status = $_POST['status'];
     $deadline = !empty($_POST['deadline']) ? $_POST['deadline'] : null;
     $user = !empty($_POST['user']) ? $_POST['user'] : null;
