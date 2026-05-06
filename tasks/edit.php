@@ -74,12 +74,12 @@
                     <label for="cat">Categorie: *</label>
                     <select id="cat" name="cat" class="form-input" required>
                         <option value="">– kies een categorie –</option>
-                        <option value="zwart" <?php echo $task['cat'] === 'zwart' ? 'selected' : ''; ?>> geen Urgente</option>
-                        <option value="rood" <?php echo $task['cat'] === 'rood' ? 'selected' : ''; ?>>geen prioriteit</option>
-                        <option value="oranje" <?php echo $task['cat'] === 'oranje' ? 'selected' : ''; ?>>Lage Prioriteit</option>
-                        <option value="groen" <?php echo $task['cat'] === 'groen' ? 'selected' : ''; ?>>Middelmatige Prioriteit</option>
-                        <option value="blauw" <?php echo $task['cat'] === 'blauw' ? 'selected' : ''; ?>>Belangrijk</option>
-                        <option value="donkergroen" <?php echo $task['cat'] === 'donkergroen' ? 'selected' : ''; ?>>Heel Belangrijk</option>
+                        <option value="zwart" <?php echo $task['cat'] === 'zwart' ? 'selected' : ''; ?>>Geen Urgente (Zwart)</option>
+                        <option value="rood" <?php echo $task['cat'] === 'rood' ? 'selected' : ''; ?>>Geen prioriteit (Rood)</option>
+                        <option value="oranje" <?php echo $task['cat'] === 'oranje' ? 'selected' : ''; ?>>Lage Prioriteit (Oranje)</option>
+                        <option value="groen" <?php echo $task['cat'] === 'groen' ? 'selected' : ''; ?>>Middelmatige Prioriteit (Groen)</option>
+                        <option value="blauw" <?php echo $task['cat'] === 'blauw' ? 'selected' : ''; ?>>Belangrijk (Blauw)</option>
+                        <option value="donkergroen" <?php echo $task['cat'] === 'donkergroen' ? 'selected' : ''; ?>>Heel Belangrijk (Donker groen(</option>
                     </select>
                 </div>
 

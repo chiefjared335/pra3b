@@ -52,7 +52,7 @@ $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
 <label for="beschrijving">Beschrijving:</label>
 <input type="text" id="beschrijving" name="beschrijving" class="form-input" placeholder="Beschrijving van de taak">
 </div>
-               
+
 <div class="form-group">
 <label for="deadline">Deadline:</label>
 <input type="date" id="deadline" name="deadline" class="form-input">
@@ -74,12 +74,12 @@ $meldingen = $statement->fetchAll(PDO::FETCH_ASSOC);
     <label for="cat">Categorie:</label>
     <select name="cat" id="cat" class="form-input">
         <option value="">– kies een categorie –</option>
-        <option value="zwart"> geen Urgente</option>
-        <option value="rood">geen prioriteit</option>
-        <option value="oranje">Lage Prioriteit</option>
-        <option value="groen">Middelmatige Prioriteit</option>
-        <option value="blauw">Belangrijk</option>
-        <option value="donkergroen">Heel Belangrijk</option>
+        <option value="zwart">Geen Urgente (Zwart)</option>
+        <option value="rood">Geen prioriteit (Rood)</option>
+        <option value="oranje">Lage Prioriteit (Oranje)</option>
+        <option value="groen">Middelmatige Prioriteit (Groen)</option>
+        <option value="blauw">Belangrijk (Blauw)</option>
+        <option value="donkergroen">Heel Belangrijk (Donker groen)</option>
     </select>
 </div>
 
